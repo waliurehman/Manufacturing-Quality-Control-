@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ApexQC | Manufacturing Quality Control Dashboard</title>
+  <meta name="description"
+    content="An interactive D3.js web-based visualization system exploring quality control data across Islamabad, Karachi, and Lahore factories. Built for DSC327." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- D3.js v7 -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- ========== LOADING SCREEN ========== -->
+  <div id="loader" class="loader-overlay">
+    <div class="loader-content">
+      <div class="loader-globe">⚙️</div>
+      <h2 class="loader-title">ApexQC Dashboard</h2>
+      <p class="loader-subtitle">Processing quality control records…</p>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loaderBar"></div>
+      </div>
+      <p class="loader-percent" id="loaderPercent">0%</p>
+    </div>
+  </div>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <div class="header-brand">
+        <span class="brand-icon">🛡️</span>
+        <span class="brand-name">ApexQC</span>
+        <span class="brand-tag">Industrial Analytics Portal</span>
+      </div>
+      <nav class="header-nav" id="headerNav">
+        <a href="#section-overview" class="nav-link active" data-section="overview">Overview</a>
+        <a href="#section-factory" class="nav-link" data-section="factory">Factory Dashboard</a>
+        <a href="#section-performance" class="nav-link" data-section="performance">Performance</a>
+        <a href="#section-trends" class="nav-link" data-section="trends">Monthly Trends</a>
+        <a href="#section-correlation" class="nav-link" data-section="correlation">Correlations</a>
+      </nav>
+      <div class="header-meta">
+        <span class="data-badge">5,000 runs</span>
+        <span class="data-badge" id="factoryBadge">3 Factories</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="section-overview">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <div class="hero-kicker">Manufacturing QC · BDS 7</div>
+      <h1 class="hero-title">
+        Precision Quality<br />
+        <span class="gradient-text">Control Portal</span>
+      </h1>
+      <p class="hero-subtitle">
+        Interactive analytical system exploring production yields, defect rates, scrap costs, and downtime metrics across 
+        <strong>Lahore</strong>, <strong>Islamabad</strong>, and <strong>Karachi</strong> plants from 2023 to 2024.
+      </p>
+      
+      <!-- Global KPIs -->
+      <div class="hero-stats" id="globalKpis">
+        <div class="stat-card">
+          <span class="stat-value" id="globalTotalProduced">—</span>
+          <span class="stat-label">Total Units Produced</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value text-defect" id="globalDefectRate">—</span>
+          <span class="stat-label">Avg Defect Rate</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value text-efficiency" id="globalEfficiency">—</span>
+          <span class="stat-label">Avg Efficiency</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value text-cost" id="globalScrapCost">—</span>
+          <span class="stat-label">Total Scrap Cost</span>
+        </div>
+      </div>
+      
+      <div class="hero-cta">
+        <a href="#section-factory" class="btn-primary" id="exploreBtn">Analyze Factories ↓</a>
+        <a href="#section-trends" class="btn-ghost" id="trendsBtn">View Trends</a>
+      </div>
+    </div>
+    <div class="hero-visual" id="heroSparkline"></div>
+  </section>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="main-content">
+
+    <!-- ======= SECTION 1: FACTORY DASHBOARD (Overview) ======= -->
+    <section class="viz-section" id="section-factory">
+      <div class="section-header">
+        <div class="section-badge">01 / Factory Dashboard</div>
+        <h2 class="section-title">Factory Performance &amp; Defect Profile</h2>
+        <p class="section-desc">
+          Filter by factory to inspect yield metrics, scrap costs, and operational downtime. 
+          The defect type breakdown updates dynamically to show the prevalent failures.
+        </p>
+      </div>
+
+      <!-- Factory Selector -->
+      <div class="controls-bar">
+        <div class="control-group">
+          <label class="ctrl-label">Select Plant</label>
+          <div class="toggle-group" id="factorySelector">
+            <button class="toggle-btn active" data-factory="All">All Plants</button>
+            <button class="toggle-btn" data-factory="Factory-Islamabad">Islamabad</button>
+            <button class="toggle-btn" data-factory="Factory-Karachi">Karachi</button>
+            <button class="toggle-btn" data-factory="Factory-Lahore">Lahore</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section grid -->
+      <div class="dashboard-grid">
+        <!-- Yield stats -->
+        <div class="kpi-panel">
+          <div class="kpi-subcard">
+            <span class="kpi-title">Production Yield</span>
+            <span class="kpi-num" id="facYield">0.00%</span>
+            <span class="kpi-desc" id="facProduced">0 units produced</span>
+          </div>
+          <div class="kpi-subcard">
+            <span class="kpi-title">Defect Losses</span>
+            <span class="kpi-num text-defect" id="facDefects">0</span>
+            <span class="kpi-desc text-defect" id="facDefectRate">0.00% Defect Rate</span>
+          </div>
+          <div class="kpi-subcard">
+            <span class="kpi-title">Scrap Financial Impact</span>
+            <span class="kpi-num text-cost" id="facScrapCost">PKR 0</span>
+            <span class="kpi-desc" id="facScrapPct">0.00% of Production Cost</span>
+          </div>
+          <div class="kpi-subcard">
+            <span class="kpi-title">Operational Downtime</span>
+            <span class="kpi-num text-downtime" id="facDowntime">0m</span>
+            <span class="kpi-desc">Average per shift</span>
+          </div>
+        </div>
+
+        <!-- Donut Chart Container -->
+        <div class="chart-container" id="donutContainer">
+          <div class="chart-title-bar">Defect Types Distribution</div>
+          <div class="chart-canvas-wrap">
+            <svg id="donutSvg"></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= SECTION 2: PERFORMANCE RANKINGS ======= -->
+    <section class="viz-section alt-bg" id="section-performance">
+      <div class="section-header">
+        <div class="section-badge">02 / Performance Analytics</div>
+        <h2 class="section-title">Products &amp; Machines Analysis</h2>
+        <p class="section-desc">
+          Compare defect rates across different product types and inspect individual machine efficiencies. 
+          Use the toggles to sort or isolate key variables.
+        </p>
+      </div>
+
+      <div class="grid-two-column">
+        <!-- Product Defect Rate ranking -->
+        <div class="card-wrapper">
+          <div class="controls-bar flex-between">
+            <span class="card-heading">Product Defect Rankings</span>
+            <div class="control-group">
+              <button id="sortProductsBtn" class="ctrl-btn">Toggle Sort</button>
+            </div>
+          </div>
+          <div class="chart-container" id="productChartContainer">
+            <svg id="productSvg"></svg>
+          </div>
+        </div>
+
+        <!-- Machine Performance Grouped Bar Chart -->
+        <div class="card-wrapper">
+          <div class="controls-bar flex-between">
+            <span class="card-heading">Machine Yield vs. Defect Rate</span>
+            <div class="control-group">
+              <div class="toggle-group" id="machineMetricSelector">
+                <button class="toggle-btn active" data-metric="both">Compare Both</button>
+                <button class="toggle-btn" data-metric="efficiency">Efficiency</button>
+                <button class="toggle-btn" data-metric="defect">Defect Rate</button>
+              </div>
+            </div>
+          </div>
+          <div class="chart-container" id="machineChartContainer">
+            <svg id="machineSvg"></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= SECTION 3: MONTHLY TRENDS WITH BRUSH ZOOM ======= -->
+    <section class="viz-section" id="section-trends">
+      <div class="section-header">
+        <div class="section-badge">03 / Temporal Trends</div>
+        <h2 class="section-title">Monthly Defect Rates vs. Efficiency</h2>
+        <p class="section-desc">
+          Monitor performance metrics over time. Drag the brush handles in the small timeline 
+          chart at the bottom to zoom in on specific production windows.
+        </p>
+      </div>
+
+      <div class="chart-container timeseries-wrap">
+        <div id="trendsContainer">
+          <svg id="trendsSvg"></svg>
+        </div>
+        <div class="brush-hint">💡 Drag on the timeline chart below to zoom or filter the time range</div>
+        <div id="brushContainer">
+          <svg id="brushSvg"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= SECTION 4: PROCESS PARAMETER CORRELATIONS ======= -->
+    <section class="viz-section alt-bg" id="section-correlation">
+      <div class="section-header">
+        <div class="section-badge">04 / Process Correlations</div>
+        <h2 class="section-title">Environmental Parameter Scatter Analysis</h2>
+        <p class="section-desc">
+          Analyze how machine temperature and pressure correlate with defects and efficiency. 
+          Use the selectors to change axes variables and hover points to inspect individual run profiles.
+        </p>
+      </div>
+
+      <div class="controls-bar">
+        <div class="control-group">
+          <label class="ctrl-label" for="scatterX">X Axis</label>
+          <select id="scatterX" class="ctrl-select">
+            <option value="Temperature_C" selected>Temperature (°C)</option>
+            <option value="Pressure_Bar">Pressure (Bar)</option>
+            <option value="Units_Produced">Units Produced</option>
+            <option value="Downtime_Minutes">Downtime (Minutes)</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label class="ctrl-label" for="scatterY">Y Axis</label>
+          <select id="scatterY" class="ctrl-select">
+            <option value="Defect_Rate_%">Defect Rate (%)</option>
+            <option value="Efficiency_%" selected>Efficiency (%)</option>
+            <option value="Downtime_Minutes">Downtime (Minutes)</option>
+            <option value="Scrap_Cost_PKR">Scrap Cost (PKR)</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label class="ctrl-label" for="scatterColor">Color Code</label>
+          <select id="scatterColor" class="ctrl-select">
+            <option value="Shift" selected>Shift (Morning/Evening/Night)</option>
+            <option value="Factory">Factory Plant</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="chart-container" id="correlationContainer">
+        <svg id="correlationSvg"></svg>
+        <div class="scatter-legend" id="scatterLegend"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="footer-brand">🛡️ ApexQC Portal</div>
+        <p>An interactive D3.js visualization system<br />for Manufacturing Quality Control analytics.</p>
+      </div>
+      <div class="footer-center">
+        <div class="footer-section-title">Visualizations</div>
+        <ul>
+          <li><a href="#section-factory">Factory Dashboard</a></li>
+          <li><a href="#section-performance">Products &amp; Machines</a></li>
+          <li><a href="#section-trends">Monthly Trends</a></li>
+          <li><a href="#section-correlation">Process Correlation</a></li>
+        </ul>
+      </div>
+      <div class="footer-right">
+        <div class="footer-section-title">Project Member</div>
+        <p><strong>Khadija Jumani</strong> · SP23-BDS-023</p>
+        <p style="margin-top:8px;color:var(--text-muted);font-size:0.78rem;">
+          Dataset: Manufacturing QC Data<br />
+          Data Visualization (DSC327) · Semester 7
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 ApexQC Dashboard · Built with D3.js · Mapped to CLO 5
+    </div>
+  </footer>
+
+  <!-- ========== GLOBAL TOOLTIP ========== -->
+  <div class="global-tooltip" id="globalTooltip" style="display:none;"></div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="js/utils.js"></script>
+  <script src="js/dataLoader.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/performance.js"></script>
+  <script src="js/trends.js"></script>
+  <script src="js/correlation.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
