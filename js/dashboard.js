@@ -1,7 +1,7 @@
 /**
  * dashboard.js
  * Factory Selector, Yield KPIs, and Defect Distribution Donut Chart
- * Authors: Wali Ur Rehman & Khadija Jumani
+ * Author: Wali Ur Rehman
  */
 
 "use strict";

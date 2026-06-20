@@ -1,7 +1,7 @@
 /**
  * performance.js
  * Horizontal bar charts for Product rankings and grouped bar charts for Machine metrics
- * Authors: Wali Ur Rehman & Khadija Jumani
+ * Author: Wali Ur Rehman
  */
 
 "use strict";

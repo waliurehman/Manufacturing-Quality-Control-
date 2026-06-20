@@ -1,7 +1,7 @@
 /**
  * trends.js
  * Monthly Yield Trends (Defect Rate vs. Efficiency) with Timeline Brush Zoom
- * Authors: Wali Ur Rehman & Khadija Jumani
+ * Author: Wali Ur Rehman
  */
 
 "use strict";

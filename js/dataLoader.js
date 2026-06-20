@@ -1,7 +1,7 @@
 /**
  * dataLoader.js
  * Loads and preprocesses Manufacturing_QC_Data.csv
- * Authors: Wali Ur Rehman & Khadija Jumani
+ * Author: Wali Ur Rehman
  */
 
 "use strict";

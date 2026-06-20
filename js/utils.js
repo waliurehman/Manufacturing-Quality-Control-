@@ -1,7 +1,7 @@
 /**
  * utils.js
  * Shared utility functions, formatting, and colors for ApexQC
- * Authors: Wali Ur Rehman & Khadija Jumani
+ * Author: Wali Ur Rehman
  */
 
 "use strict";

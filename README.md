@@ -1,7 +1,7 @@
 # 🛡️ ApexQC – Manufacturing Quality Control Dashboard
 
 **Data Visualization Semester Project (DSC327)**  
-**Wali Ur Rehman** (SP23-BDS-054) · **Khadija Jumani** (SP23-BDS-023)  
+**Wali Ur Rehman** (SP23-BDS-054) · 
 COMSATS University Islamabad · Semester 7  
 
 ---
@@ -91,4 +91,4 @@ LabFinal/
 ## 👥 Authors & Roles
 
 * **Wali Ur Rehman** (SP23-BDS-054): Code Architecture, Trends line chart with Brush, Parameter scatter plot, Data loaders, and Git management.
-* **Khadija Jumani** (SP23-BDS-023): UI Design, Factory Donut chart, Machine & Product performance bars, and Report documentation.
+

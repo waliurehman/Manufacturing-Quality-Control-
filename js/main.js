@@ -2,7 +2,7 @@
  * main.js
  * Application entry point – loads Manufacturing QC data, bootstraps all charts,
  * handles responsive resizing, navigation, and visual scroll reveal.
- * Authors: Wali Ur Rehman & Khadija Jumani
+ * Author: Wali Ur Rehman
  */
 
 "use strict";

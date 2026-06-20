@@ -1,7 +1,7 @@
 /**
  * correlation.js
  * Process Parameter Scatter Plot with dynamic X/Y axes and Shift/Factory color mapping
- * Authors: Wali Ur Rehman & Khadija Jumani
+ * Author: Wali Ur Rehman
  */
 
 "use strict";
