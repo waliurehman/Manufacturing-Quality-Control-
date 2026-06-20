@@ -67,10 +67,10 @@
   try {
     const kpis = DataLoader.getKpis("All");
     
-    d3.select("#globalTotalProduced").text(Utils.formatNumber(kpis.totalProduced));
+    d3.select("#globalTotalProduced").text(Utils.formatMillions(kpis.totalProduced));
     d3.select("#globalDefectRate").text(Utils.formatPercent(kpis.avgDefectRate));
     d3.select("#globalEfficiency").text(Utils.formatPercent(kpis.avgEfficiency));
-    d3.select("#globalScrapCost").text(Utils.formatCurrency(kpis.totalScrapCost));
+    d3.select("#globalScrapCost").text("PKR " + Utils.formatMillions(kpis.totalScrapCost));
   } catch (e) {
     console.error("Hero statistics layout failed:", e);
   }

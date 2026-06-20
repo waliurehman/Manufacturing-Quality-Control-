@@ -166,9 +166,10 @@ const CorrelationChart = (() => {
           if (key === "temperatureC") return val.toFixed(1) + " °C";
           if (key === "pressureBar") return val.toFixed(2) + " Bar";
           if (key === "defectRate" || key === "efficiency") return val.toFixed(2) + "%";
-          if (key === "scrapCost") return Utils.formatCurrency(val);
+          if (key === "scrapCost") return "PKR " + Utils.formatMillions(val);
           if (key === "downtimeMinutes") return val + " mins";
-          return Utils.formatNumber(val);
+          if (key === "unitsProduced") return Utils.formatMillions(val);
+          return Utils.formatMillions(val);
         };
 
         Utils.showTooltip(tooltip, `

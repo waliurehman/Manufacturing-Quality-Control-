@@ -55,12 +55,12 @@ const Dashboard = (() => {
 
     // 1. Update Yield & Operational KPI panels
     d3.select("#facYield").text(Utils.formatPercent(kpis.yieldRate));
-    d3.select("#facProduced").text(`${Utils.formatNumber(kpis.totalProduced)} units produced`);
+    d3.select("#facProduced").text(`${Utils.formatMillions(kpis.totalProduced)} units produced`);
     
-    d3.select("#facDefects").text(Utils.formatNumber(kpis.totalDefective));
+    d3.select("#facDefects").text(Utils.formatMillions(kpis.totalDefective));
     d3.select("#facDefectRate").text(`${Utils.formatPercent(kpis.avgDefectRate)} Defect Rate`);
     
-    d3.select("#facScrapCost").text(Utils.formatCurrency(kpis.totalScrapCost));
+    d3.select("#facScrapCost").text("PKR " + Utils.formatMillions(kpis.totalScrapCost));
     d3.select("#facScrapPct").text(`${Utils.formatPercent(kpis.scrapPct)} of Prod Cost`);
     
     d3.select("#facDowntime").text(Utils.formatDowntime(kpis.avgDowntime));
@@ -87,7 +87,7 @@ const Dashboard = (() => {
 
     // Update center label
     g.select(".donut-center-title")
-      .text(Utils.formatNumber(totalDefects));
+      .text(Utils.formatMillions(totalDefects));
 
     // Bind data
     const arcs = g.selectAll(".donut-arc-group")
@@ -127,7 +127,7 @@ const Dashboard = (() => {
         
         Utils.showTooltip(tooltip, `
           <div class="tt-title">${d.data.type}</div>
-          <div class="tt-row"><span class="tt-key">Defects</span><span class="tt-val text-accent">${Utils.formatNumber(d.data.count)}</span></div>
+          <div class="tt-row"><span class="tt-key">Defects</span><span class="tt-val text-accent">${Utils.formatMillions(d.data.count)}</span></div>
           <div class="tt-row"><span class="tt-key">Proportion</span><span class="tt-val text-defect">${Utils.formatPercent(pct)}</span></div>
         `, event);
       })

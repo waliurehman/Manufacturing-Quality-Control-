@@ -152,8 +152,8 @@ const PerformanceChart = (() => {
       .on("mouseover", (event, d) => {
         Utils.showTooltip(tooltip, `
           <div class="tt-title">${d.product}</div>
-          <div class="tt-row"><span class="tt-key">Produced</span><span class="tt-val text-accent">${Utils.formatNumber(d.produced)}</span></div>
-          <div class="tt-row"><span class="tt-key">Defective</span><span class="tt-val text-defect">${Utils.formatNumber(d.defective)}</span></div>
+          <div class="tt-row"><span class="tt-key">Produced</span><span class="tt-val text-accent">${Utils.formatMillions(d.produced)}</span></div>
+          <div class="tt-row"><span class="tt-key">Defective</span><span class="tt-val text-defect">${Utils.formatMillions(d.defective)}</span></div>
           <div class="tt-row"><span class="tt-key">Defect Rate</span><span class="tt-val text-defect">${Utils.formatPercent(d.defectRate)}</span></div>
         `, event);
       })
@@ -284,7 +284,7 @@ const PerformanceChart = (() => {
           <div class="tt-title">Machine ${raw.machineId}</div>
           <div class="tt-row"><span class="tt-key">Efficiency</span><span class="tt-val text-efficiency">${Utils.formatPercent(raw.efficiency)}</span></div>
           <div class="tt-row"><span class="tt-key">Defect Rate</span><span class="tt-val text-defect">${Utils.formatPercent(raw.defectRate)}</span></div>
-          <div class="tt-row"><span class="tt-key">Units Produced</span><span class="tt-val text-accent">${Utils.formatNumber(raw.produced)}</span></div>
+          <div class="tt-row"><span class="tt-key">Units Produced</span><span class="tt-val text-accent">${Utils.formatMillions(raw.produced)}</span></div>
           <div class="tt-row"><span class="tt-key">Total Downtime</span><span class="tt-val">${Utils.formatDowntime(raw.downtime)}</span></div>
         `, event);
       })

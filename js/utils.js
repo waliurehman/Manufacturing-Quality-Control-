@@ -47,6 +47,15 @@ const Utils = (() => {
     return numFormatter(v);
   }
 
+  function formatMillions(v) {
+    if (v >= 1000000) {
+      return (v / 1000000).toFixed(2) + "M";
+    } else if (v >= 1000) {
+      return (v / 1000).toFixed(1) + "K";
+    }
+    return v.toFixed(0);
+  }
+
   function formatPercent(v) {
     return v.toFixed(2) + "%";
   }
@@ -104,8 +113,7 @@ const Utils = (() => {
     showTooltip,
     moveTooltip,
     hideTooltip,
-    formatNumber,
-    formatPercent,
+    formatNumber,    formatMillions,    formatPercent,
     formatCurrency,
     formatDowntime,
     shiftColor,
