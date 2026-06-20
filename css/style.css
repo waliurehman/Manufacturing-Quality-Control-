@@ -5,23 +5,23 @@
 
 /* ---- CSS Variables / Design Tokens ---- */
 :root {
-  --bg-base: #090d16;
-  --bg-surface: #0f172a;
-  --bg-card: #1e293b;
-  --bg-alt: #0b0f19;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(14, 165, 233, 0.35);
+  --bg-base: #0a0e27;
+  --bg-surface: #111d3d;
+  --bg-card: #1a2952;
+  --bg-alt: #0d1225;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-glow: rgba(79, 172, 254, 0.4);
 
-  --accent-blue: #0ea5e9;
-  --accent-cyan: #06b6d4;
-  --accent-orange: #f97316;
-  --accent-red: #f43f5e;
-  --accent-green: #10b981;
-  --accent-purple: #a78bfa;
+  --accent-blue: #4faaff;
+  --accent-cyan: #00d4ff;
+  --accent-orange: #ff8c42;
+  --accent-red: #ff4757;
+  --accent-green: #2ed573;
+  --accent-purple: #dd70db;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #475569;
+  --text-primary: #f5f7fa;
+  --text-secondary: #a0b0c8;
+  --text-muted: #596074;
 
   --font-body: 'Inter', sans-serif;
   --font-head: 'Space Grotesk', sans-serif;
@@ -117,7 +117,7 @@ svg {
   font-size: 2.2rem;
   font-weight: 700;
   margin: 16px 0 4px;
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  background: linear-gradient(135deg, #4faaff, #00d4ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.5px;
@@ -141,7 +141,7 @@ svg {
 .loader-bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+  background: linear-gradient(90deg, #4faaff, #00d4ff);
   border-radius: 99px;
   transition: width 0.2s ease;
 }
@@ -193,7 +193,7 @@ svg {
   font-family: var(--font-head);
   font-weight: 700;
   font-size: 1.2rem;
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  background: linear-gradient(135deg, #4faaff, #00d4ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -231,8 +231,8 @@ svg {
 }
 
 .nav-link.active {
-  color: var(--accent-blue);
-  border: 1px solid rgba(14, 165, 233, 0.15);
+  color: #4faaff;
+  border: 1px solid rgba(79, 172, 254, 0.2);
 }
 
 .header-meta {
@@ -247,9 +247,9 @@ svg {
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 99px;
-  background: rgba(14, 165, 233, 0.08);
-  border: 1px solid rgba(14, 165, 233, 0.2);
-  color: var(--accent-blue);
+  background: rgba(79, 172, 254, 0.12);
+  border: 1px solid rgba(79, 172, 254, 0.25);
+  color: #4faaff;
 }
 
 /* ============================================================
@@ -296,9 +296,9 @@ svg {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent-blue);
-  background: rgba(14, 165, 233, 0.08);
-  border: 1px solid rgba(14, 165, 233, 0.15);
+  color: #4faaff;
+  background: rgba(79, 172, 254, 0.1);
+  border: 1px solid rgba(79, 172, 254, 0.2);
   padding: 4px 12px;
   border-radius: 99px;
   margin-bottom: 20px;
@@ -314,7 +314,7 @@ svg {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 40%, var(--accent-green) 100%);
+  background: linear-gradient(135deg, #4faaff 0%, #00d4ff 40%, #2ed573 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -351,26 +351,27 @@ svg {
 }
 
 .stat-card:hover {
-  border-color: var(--border-glow);
-  box-shadow: var(--shadow-glow);
+  border-color: rgba(79, 172, 254, 0.5);
+  box-shadow: 0 0 24px rgba(79, 172, 254, 0.15);
 }
 
 .stat-value {
   font-family: var(--font-head);
   font-size: 1.6rem;
   font-weight: 700;
+  color: #4faaff;
 }
 
 .stat-value.text-defect {
-  color: var(--accent-red);
+  color: #ff4757;
 }
 
 .stat-value.text-efficiency {
-  color: var(--accent-green);
+  color: #2ed573;
 }
 
 .stat-value.text-cost {
-  color: var(--accent-orange);
+  color: #ff8c42;
 }
 
 .stat-label {
@@ -388,18 +389,18 @@ svg {
 .btn-primary {
   padding: 11px 24px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  background: linear-gradient(135deg, #4faaff, #00d4ff);
   color: #ffffff;
   font-weight: 600;
   font-size: 0.85rem;
   transition: all var(--transition);
   border: none;
-  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.25);
+  box-shadow: 0 4px 16px rgba(79, 172, 254, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+  box-shadow: 0 6px 20px rgba(79, 172, 254, 0.45);
 }
 
 .btn-ghost {
@@ -448,7 +449,7 @@ svg {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent-blue);
+  color: #4faaff;
   margin-bottom: 8px;
 }
 
@@ -529,8 +530,8 @@ svg {
 }
 
 .ctrl-btn:hover {
-  border-color: var(--accent-blue);
-  color: var(--accent-blue);
+  border-color: #4faaff;
+  color: #4faaff;
 }
 
 .toggle-group {
@@ -553,9 +554,9 @@ svg {
 }
 
 .toggle-btn.active {
-  background: var(--bg-card);
+  background: linear-gradient(135deg, #4faaff, #00d4ff);
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 8px rgba(79, 172, 254, 0.5);
 }
 
 .card-heading {
@@ -579,8 +580,8 @@ svg {
 }
 
 .chart-container:hover {
-  box-shadow: var(--shadow-card), var(--shadow-glow);
-  border-color: rgba(14, 165, 233, 0.2);
+  box-shadow: var(--shadow-card), 0 0 24px rgba(79, 172, 254, 0.2);
+  border-color: rgba(79, 172, 254, 0.25);
 }
 
 .chart-title-bar {
@@ -656,14 +657,14 @@ svg {
   font-family: var(--font-head);
   font-size: 1.7rem;
   font-weight: 700;
-  color: var(--accent-blue);
+  color: #4faaff;
   line-height: 1.1;
   margin-bottom: 4px;
 }
 
-.kpi-num.text-defect { color: var(--accent-red); }
-.kpi-num.text-cost { color: var(--accent-orange); }
-.kpi-num.text-downtime { color: var(--accent-purple); }
+.kpi-num.text-defect { color: #ff4757; }
+.kpi-num.text-cost { color: #ff8c42; }
+.kpi-num.text-downtime { color: #dd70db; }
 
 .kpi-desc {
   font-size: 0.75rem;
@@ -1003,7 +1004,7 @@ svg {
 }
 
 .site-footer ul li a:hover {
-  color: var(--accent-blue);
+  color: #4faaff;
 }
 
 .footer-bottom {

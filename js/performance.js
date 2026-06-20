@@ -143,8 +143,8 @@ const PerformanceChart = (() => {
       .attr("height", yScale.bandwidth())
       .attr("width", d => xScale(d.defectRate))
       .attr("fill", (d, i) => {
-        // Gradient of purple based on value
-        return d3.interpolatePurples(0.45 + (d.defectRate / 20));
+        // Gradient of orange/coral based on value
+        return d3.interpolateOrRd(0.35 + (d.defectRate / 20));
       });
 
     // Tooltips on products
@@ -274,7 +274,7 @@ const PerformanceChart = (() => {
       .attr("width", x1Scale.bandwidth())
       .attr("y", d => d.metric === "efficiency" ? yLeft(d.val) : yRight(d.val))
       .attr("height", d => d.metric === "efficiency" ? (mH - yLeft(d.val)) : (mH - yRight(d.val)))
-      .attr("fill", d => d.metric === "efficiency" ? "var(--accent-green)" : "var(--accent-red)");
+      .attr("fill", d => d.metric === "efficiency" ? "#2ed573" : "#ff4757");
 
     // Tooltips on Machine bars
     gMachine.selectAll(".perf-bar")
@@ -302,10 +302,10 @@ const PerformanceChart = (() => {
 
     const legItems = [];
     if (machineMetric === "both" || machineMetric === "efficiency") {
-      legItems.push({ label: "Avg Efficiency", color: "var(--accent-green)" });
+      legItems.push({ label: "Avg Efficiency", color: "#2ed573" });
     }
     if (machineMetric === "both" || machineMetric === "defect") {
-      legItems.push({ label: "Avg Defect Rate", color: "var(--accent-red)" });
+      legItems.push({ label: "Avg Defect Rate", color: "#ff4757" });
     }
 
     const items = legG.selectAll(".mach-leg")

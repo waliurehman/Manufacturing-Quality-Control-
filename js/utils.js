@@ -62,20 +62,20 @@ const Utils = (() => {
   // ── Color Schemes ────────────────────────────────────────
   const colors = {
     // Shifts
-    Morning: "#10b981",  // Emerald Green
-    Evening: "#0ea5e9",  // Sky Blue
-    Night:   "#f43f5e",  // Rose Red
+    Morning: "#2ed573",  // Bright Green
+    Evening: "#4faaff",  // Bright Blue
+    Night:   "#ff8c42",  // Orange
     
     // Factories
-    "Factory-Lahore":    "#a78bfa", // Soft Purple
-    "Factory-Islamabad": "#38bdf8", // Sky blue-cyan
-    "Factory-Karachi":   "#fb7185", // Pinkish-red
+    "Factory-Lahore":    "#dd70db", // Magenta
+    "Factory-Islamabad": "#00d4ff", // Cyan
+    "Factory-Karachi":   "#ff4757", // Pink-Red
     
     // Defect types
-    "Material Defect":  "#ef4444", // Red
-    "Dimensional Error": "#f97316", // Orange
-    "Assembly Fault":    "#3b82f6", // Blue
-    "Surface Crack":     "#eab308", // Yellow
+    "Material Defect":  "#ff6348", // Coral Red
+    "Dimensional Error": "#ffa502", // Amber
+    "Assembly Fault":    "#4faaff", // Sky Blue
+    "Surface Crack":     "#ffd93d", // Bright Yellow
   };
 
   function shiftColor(shift) {

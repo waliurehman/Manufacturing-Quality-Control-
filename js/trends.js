@@ -84,14 +84,14 @@ const TrendsChart = (() => {
       .attr("transform", "rotate(-90)")
       .attr("x", -mainH / 2).attr("y", -36)
       .attr("text-anchor", "middle")
-      .attr("fill", "var(--accent-red)").attr("font-size", "10px")
+      .attr("fill", "#ff4757").attr("font-size", "10px")
       .text("Average Defect Rate (%)");
 
     gMain.append("text").attr("class", "axis-label")
       .attr("transform", "rotate(90)")
       .attr("x", mainH / 2).attr("y", -mainW - 36)
       .attr("text-anchor", "middle")
-      .attr("fill", "var(--accent-green)").attr("font-size", "10px")
+      .attr("fill", "#2ed573").attr("font-size", "10px")
       .text("Average Efficiency (%)");
 
     // Legends
@@ -204,20 +204,20 @@ const TrendsChart = (() => {
 
     // Defect Rate Line
     let dPath = linesG.select(".defect-path");
-    if (dPath.empty()) dPath = linesG.append("path").attr("class", "defect-path trend-line").attr("stroke", "var(--accent-red)");
+    if (dPath.empty()) dPath = linesG.append("path").attr("class", "defect-path trend-line").attr("stroke", "#ff4757");
     dPath.datum(data).transition().duration(tDuration).attr("d", lineDefect);
 
     let dArea = linesG.select(".defect-area");
-    if (dArea.empty()) dArea = linesG.append("path").attr("class", "defect-area trend-area").attr("fill", "var(--accent-red)");
+    if (dArea.empty()) dArea = linesG.append("path").attr("class", "defect-area trend-area").attr("fill", "#ff4757");
     dArea.datum(data).transition().duration(tDuration).attr("d", areaDefect);
 
     // Efficiency Line
     let ePath = linesG.select(".eff-path");
-    if (ePath.empty()) ePath = linesG.append("path").attr("class", "eff-path trend-line").attr("stroke", "var(--accent-green)");
+    if (ePath.empty()) ePath = linesG.append("path").attr("class", "eff-path trend-line").attr("stroke", "#2ed573");
     ePath.datum(data).transition().duration(tDuration).attr("d", lineEff);
 
     let eArea = linesG.select(".eff-area");
-    if (eArea.empty()) eArea = linesG.append("path").attr("class", "eff-area trend-area").attr("fill", "var(--accent-green)");
+    if (eArea.empty()) eArea = linesG.append("path").attr("class", "eff-area trend-area").attr("fill", "#2ed573");
     eArea.datum(data).transition().duration(tDuration).attr("d", areaEff);
 
     // Interactive Hover elements
@@ -243,14 +243,14 @@ const TrendsChart = (() => {
     const dotDefect = gMain.append("circle")
       .attr("class", "hover-dot")
       .attr("r", 5)
-      .attr("fill", "var(--accent-red)")
+      .attr("fill", "#ff4757")
       .attr("stroke", "#ffffff").attr("stroke-width", "1.5px")
       .style("display", "none");
 
     const dotEff = gMain.append("circle")
       .attr("class", "hover-dot")
       .attr("r", 5)
-      .attr("fill", "var(--accent-green)")
+      .attr("fill", "#2ed573")
       .attr("stroke", "#ffffff").attr("stroke-width", "1.5px")
       .style("display", "none");
 
@@ -333,8 +333,8 @@ const TrendsChart = (() => {
     legG.selectAll("*").remove();
 
     const legendItems = [
-      { label: "Defect Rate (%)", color: "var(--accent-red)" },
-      { label: "Machine Efficiency (%)", color: "var(--accent-green)" }
+      { label: "Defect Rate (%)", color: "#ff4757" },
+      { label: "Machine Efficiency (%)", color: "#2ed573" }
     ];
 
     const items = legG.selectAll(".ts-leg")
