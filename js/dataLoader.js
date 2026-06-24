@@ -75,6 +75,8 @@ const DataLoader = (() => {
     const totalScrapCost  = d3.sum(data, d => d.scrapCost);
     const totalProdCost   = d3.sum(data, d => d.productionCost);
     const avgDowntime     = d3.mean(data, d => d.downtimeMinutes);
+    const totalDowntime   = d3.sum(data, d => d.downtimeMinutes);
+    const totalProductCost = totalProdCost; // Alias for clarity
 
     return {
       totalProduced,
@@ -84,7 +86,9 @@ const DataLoader = (() => {
       avgEfficiency,
       totalScrapCost,
       totalProdCost,
+      totalProductCost,
       avgDowntime,
+      totalDowntime,
       yieldRate: totalProduced ? (totalGood / totalProduced * 100) : 0.0,
       scrapPct: totalProdCost ? (totalScrapCost / totalProdCost * 100) : 0.0
     };

@@ -71,6 +71,15 @@
     d3.select("#globalDefectRate").text(Utils.formatPercent(kpis.avgDefectRate));
     d3.select("#globalEfficiency").text(Utils.formatPercent(kpis.avgEfficiency));
     d3.select("#globalScrapCost").text("PKR " + Utils.formatMillions(kpis.totalScrapCost));
+
+    // ─── Initialize KPI Summary Section ─────────────────────────────────────
+    d3.select("#summaryDefectRate").text(Utils.formatPercent(kpis.avgDefectRate));
+    d3.select("#summaryEfficiency").text(Utils.formatPercent(kpis.avgEfficiency));
+    d3.select("#summaryDefectiveUnits").text(Utils.formatMillions(kpis.totalDefective));
+    d3.select("#summaryProductCost").text("PKR " + Utils.formatMillions(kpis.totalProductCost));
+    d3.select("#summaryScrapCost").text("PKR " + Utils.formatMillions(kpis.totalScrapCost));
+    d3.select("#summaryProduced").text(Utils.formatMillions(kpis.totalProduced));
+    d3.select("#summaryDowntime").text(Utils.formatDowntime(kpis.totalDowntime));
   } catch (e) {
     console.error("Hero statistics layout failed:", e);
   }

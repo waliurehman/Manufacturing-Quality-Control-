@@ -56,6 +56,19 @@ const Utils = (() => {
     return v.toFixed(0);
   }
 
+  function formatSmart(v) {
+    if (v >= 1000000000) {
+      return (v / 1000000000).toFixed(2).replace(/\.00$/, "") + "bn";
+    } else if (v >= 1000000) {
+      const val = v / 1000000;
+      return (val % 1 === 0 ? val.toFixed(0) : val.toFixed(2)) + "M";
+    } else if (v >= 1000) {
+      const val = v / 1000;
+      return val.toFixed(0) + "K";
+    }
+    return v.toFixed(2).replace(/\.00$/, "");
+  }
+
   function formatPercent(v) {
     return v.toFixed(2) + "%";
   }
@@ -113,7 +126,10 @@ const Utils = (() => {
     showTooltip,
     moveTooltip,
     hideTooltip,
-    formatNumber,    formatMillions,    formatPercent,
+    formatNumber,
+    formatMillions,
+    formatSmart,
+    formatPercent,
     formatCurrency,
     formatDowntime,
     shiftColor,
